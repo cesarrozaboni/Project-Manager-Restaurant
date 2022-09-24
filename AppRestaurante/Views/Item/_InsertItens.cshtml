@@ -1,0 +1,36 @@
+﻿@model AppRestaurante.ViewModel.ItemViewModel
+
+<fieldset>
+    <legend>Novo Item</legend>
+
+    @using (Html.BeginForm("InsertNewItem", "Item", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.ItemName, new { style = "font-size: 12pt;" })
+                @Html.TextBoxFor(m => m.ItemName, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ItemName, null, new { style = "font-size: 12pt;", @class = "text-danger" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.ItemPrice, new { style = "font-size: 12pt;" })
+                @Html.TextBoxFor(m => m.ItemPrice, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ItemPrice, null, new { style = "font-size: 12pt;", @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.ItemCategory, new { style = "font-size: 12pt;" })
+                @Html.DropDownListFor(m => m.ItemCategory, (IEnumerable<SelectListItem>)ViewData["ItensCategory"], new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ItemCategory, null, new { style = "font-size: 12pt;", @class = "text-danger" })
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" value="Salvar" class="btn btn-success" />
+            </div>
+        </div>
+        @Html.ValidationSummary(false, null, new { style = "font-size: 10pt;", @class = "text-danger fw-bold" })
+    }
+</fieldset>

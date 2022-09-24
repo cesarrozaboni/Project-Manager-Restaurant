@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html" charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Sistema Restaurante</title>
+
+    <link rel="stylesheet" href="~/Content/bootstrap/bootstrap3.3.6.min.css" asp-append-version="true" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="~/Content/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Content/bootstrap/dist/css/bootstrap-flatly.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Content/bootstrap/dist/css/bootstrap-grid.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Content/bootstrap/dist/css/bootstrap-reboot.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Content/bootstrap/dist/css/bootstrap-utilities.min.css" asp-append-version="true" />
+
+
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.3.3.6.min.js"></script>
+    <script type="text/javascript" src="~/Content/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Content/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+    @Scripts.Render("~/Scripts/globalize.js")
+    @Scripts.Render("~/Scripts/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.globalize.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+
+
+
+    <div class="navbar navbar-dark bg-dark navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <ul class="navbar-nav mr-auto d-inline">
+                    <li>
+                        @Html.ActionLink("Vendas", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Produto", "Index", "Item", new { area = "" }, new { @class = "navbar-brand" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Pagamento", "Index", "Payment", new { area = "" }, new { @class = "navbar-brand" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Mesas", "Index", "Table", new { area = "" }, new { @class = "navbar-brand" })
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        <br />
+        <br />
+
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+
+
+</body>
+</html>

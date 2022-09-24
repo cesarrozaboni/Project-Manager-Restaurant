@@ -1,0 +1,46 @@
+﻿@model AppRestaurante.ViewModel.PaymentTypeViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Content/Itens/Index.css" rel="stylesheet" />
+
+<ul class="nav nav-tabs" id="TabItens" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link" id="cadastro-tab" data-toggle="tab" href="#cadastro" role="tab" aria-controls="cadastro" aria-selected="true">Cadastrar</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="excluir-tab" data-toggle="tab" href="#excluir" role="tab" aria-controls="excluir" aria-selected="false">Excluir</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade" id="cadastro" role="tabpanel" aria-labelledby="cadastro-tab">
+        @{
+            Html.RenderPartial("~/Views/Payment/_InsertPayment.cshtml", Model);
+        }
+    </div>
+
+    <div class="tab-pane fade" id="excluir" role="tabpanel" aria-labelledby="excluir-tab">
+        @{
+            Html.RenderPartial("~/Views/Payment/_DeletePayment.cshtml", Model);
+        }
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#@ViewData["tab"]').click();
+    });
+
+    if ('@ViewData["message"]' != '') {
+        alert('@Html.Raw(ViewData["message"])')
+    }
+
+</script>
+
+
+
+

@@ -1,0 +1,25 @@
+﻿@model AppRestaurante.ViewModel.PaymentTypeViewModel
+
+<fieldset>
+    <legend>Novo Pagamento</legend>
+
+    @using (Html.BeginForm("InsertNewPayment", "Payment", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.PaymentTypeName, new { style = "font-size: 12pt;" })
+                @Html.TextBoxFor(m => m.PaymentTypeName, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PaymentTypeName, null, new { style = "font-size: 12pt;", @class = "text-danger" })
+            </div>  
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" value="Salvar" class="btn btn-success" />
+            </div>
+        </div>
+        @Html.ValidationSummary(false, null, new { style = "font-size: 10pt;", @class = "text-danger fw-bold" })
+    }
+</fieldset>

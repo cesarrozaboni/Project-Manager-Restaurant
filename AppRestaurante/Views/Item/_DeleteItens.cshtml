@@ -1,0 +1,72 @@
+﻿@model AppRestaurante.ViewModel.ItemViewModel
+
+<fieldset>
+    <legend>Remover Item</legend>
+
+    @using (Html.BeginForm("DeleteItem", "Item", FormMethod.Post, new { @id="formDelete", @onsubmit= "return  $('#formDelete #ItemName').val() != '' && confirm(`Confirma excluir o item ${ $('#formDelete #ItemName').val() } ?` )" }))
+    {
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <span>Item:</span>
+            @Html.DropDownList("selectItemRemove", new SelectList((IEnumerable<SelectListItem>)ViewData["AllItens"], dataValueField: "Value", dataTextField: "Text"), htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        @Html.LabelFor(m => m.ItemName, new { style = "font-size: 12pt;" })
+        @Html.TextBoxFor(m => m.ItemName, null, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+
+    <div class="col-md-4">
+        @Html.LabelFor(m => m.ItemPrice, new { style = "font-size: 12pt;" })
+        @Html.TextBoxFor(m => m.ItemPrice, null, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="col-md-4">
+        @Html.LabelFor(m => m.ItemCategory, new { style = "font-size: 12pt;" })
+        @Html.DropDownListFor(m => m.ItemCategory, (IEnumerable<SelectListItem>)ViewData["ItensCategory"], new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-danger">Remover</button>
+            </div>
+        </div>
+
+        @Html.HiddenFor(m => m.ItemId, new { @id = "hdIdDelete" })
+    }
+</fieldset>
+
+<script>
+    $('#selectItemRemove').change(function () {
+
+        if ($(this).val() === ' ') {
+            $('#formDelete #ItemName').val('');
+            $('#formDelete #ItemPrice').val('');
+            $('#formDelete #ItemCategory').val('');
+            $('#hdIdDelete').val('');
+        }
+
+        $.ajax({
+            url: "Item/GetItemById",
+            type: "GET",
+            data: {
+                id: $(this).val()
+            },
+            success(result, status, xhr) {
+                $('#formDelete #ItemName').val(result.ItemName);
+                $('#formDelete #ItemPrice').val(parseFloat(result.ItemPrice).toFixed(2).toString().replace(".", ","));
+                $('#formDelete #ItemCategory').val(result.ItemCategory);
+                $('#hdIdDelete').val(result.ItemId);
+            },
+            error(xhr, status, error) {
+                console.error(xhr);
+                console.error(status);
+                console.error(error);
+            }
+        });
+    });
+</script>

@@ -1,0 +1,36 @@
+﻿@model AppRestaurante.ViewModel.PaymentTypeViewModel
+
+<fieldset>
+    <legend>Remover Item</legend>
+
+    @using (Html.BeginForm("DeletePayment", "Payment", FormMethod.Post, new { @id = "formDelete", @onsubmit = "return  $('#formDelete #selectItemRemove option:selected').val().trim() != '' && confirm(`Confirma excluir o item ${ $('#formDelete #selectItemRemove option:selected').text() } ?` )" }))
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <span>Item:</span>
+                    @Html.DropDownList("selectItemRemove", new SelectList((IEnumerable<SelectListItem>)ViewData["AllItens"], dataValueField: "Value", dataTextField: "Text"), htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-danger">Remover</button>
+            </div>
+        </div>
+
+        @Html.HiddenFor(m => m.PaymentTypeName, new { @id = "hdPaymentName" })
+        @Html.HiddenFor(m => m.PaymentTypeId, new { @id = "hdIdDelete" })
+    }
+
+</fieldset>
+
+<script>
+    $('#selectItemRemove').change(function () {
+        $('#hdIdDelete').val($(this).val())
+        $('#hdPaymentName').val($(this).text())
+    });
+</script>
